@@ -89,7 +89,7 @@ namespace Mandelbrot
             return (int) MapRange(iteration, 0, this.iterations, 0, 255);
         }
 
-		// credits to: https://stackoverflow.com/questions/4229662/convert-numbers-within-a-range-to-numbers-within-another-range
+		// credits to: https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
 		float MapRange(float number, float min, float max, float newMin, float newMax)
         {
             float oldRange = (max - min);
