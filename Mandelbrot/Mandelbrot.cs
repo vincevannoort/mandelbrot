@@ -9,7 +9,7 @@ namespace Mandelbrot
         
         Bitmap MandelbrotView;
 
-		int pixelWidth = 500, pixelHeight = 500;
+		int pixelWidth = 1000, pixelHeight = 1000;
         int iterations = 128;
         int limit = 20;
         float width, height;
@@ -22,8 +22,8 @@ namespace Mandelbrot
             this.Size = new Size(this.pixelWidth, this.pixelHeight);
 
             // initialise values
-            this.width = 4;
-            this.height = 4;
+            this.width = 2;
+            this.height = 2;
             this.xmin = -(this.width) / 2;
             this.ymin = -(this.height) / 2;
             this.xmax = xmin + width;
@@ -51,7 +51,7 @@ namespace Mandelbrot
 
 
             // after all pixels are set, add the image to the view
-            pea.Graphics.DrawImage(MandelbrotView, 0,0, 500, 500);
+            pea.Graphics.DrawImage(MandelbrotView, 0, 0, this.pixelWidth, this.pixelHeight);
 		}
 
         int CalculateMandelbrot(int i, int j)
