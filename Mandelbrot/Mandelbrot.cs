@@ -108,7 +108,7 @@ namespace Mandelbrot
                 a = (ta * ta - tb * tb) + x;
                 b = 2 * ta * tb + y;
 
-                if ((a*a + b*b) > this.limit)
+                if (Math.Sqrt(a*a + b*b) > this.limit)
                 {
                     break;
                 }
