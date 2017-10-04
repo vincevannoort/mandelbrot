@@ -140,11 +140,20 @@ namespace Mandelbrot
 			MainMenu mainMenu = new MainMenu();
 			MenuItem menuAfbeelding = new MenuItem("&Afbeelding opslaan");
             MenuItem menuReset = new MenuItem("&Reset");
+            menuReset.Click += this.Reset;
 
 			mainMenu.MenuItems.Add(menuAfbeelding);
             mainMenu.MenuItems.Add(menuReset);
 
 			this.Menu = mainMenu;
+        }
+
+        void Reset(Object obj, EventArgs ea)
+        {
+            this.inputCenterX.Text = (-0.35).ToString();
+            this.inputCenterY.Text = (0).ToString();
+            this.inputZoom.Text = (1).ToString();
+            this.Invalidate();
         }
 
 		// credits to: https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
