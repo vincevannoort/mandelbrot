@@ -51,12 +51,14 @@ namespace Mandelbrot
             // initialise values
             float centerX = float.Parse(this.inputCenterX.Text);
             float centerY = float.Parse(this.inputCenterY.Text);
-            this.width = 2;
-            this.height = 2;
-            this.xmin = (-(this.width) / 2);
-            this.ymin = (-(this.height) / 2);
-            this.xmax = (this.xmin + width);
-            this.ymax = (this.ymin + height);
+            this.width = 4;
+            this.height = 4;
+            this.xmin = (-(this.width) / 2) + centerX;
+            this.ymin = (-(this.height) / 2) + centerY;
+            this.xmax = ((this.width) / 2) + centerX;
+            this.ymax = ((this.height) / 2) + centerY;
+
+            this.Text = "xmin " + xmin.ToString() + " | ymin " + xmin.ToString() +  " | xmax " + xmax.ToString() + " | ymax " + ymax.ToString();
 
             // create bitmap object for view
 			MandelbrotView = new Bitmap(this.pixelWidth, this.pixelHeight);
@@ -85,12 +87,6 @@ namespace Mandelbrot
             // preserve for later
             float x = a;
             float y = b;
-
-            // temporary for debugging
-            if (i == 0 && j == 0)
-            {
-                this.Text = a.ToString() + "|" + b.ToString();
-			}
 
             // f (a,b) = (a*a-b*b+x, 2*a*b+y)
             int iteration = 0;
