@@ -139,6 +139,7 @@ namespace Mandelbrot
         {
 			MainMenu mainMenu = new MainMenu();
 			MenuItem menuAfbeelding = new MenuItem("&Afbeelding opslaan");
+            menuAfbeelding.Click += this.CreateBitmap;
             MenuItem menuReset = new MenuItem("&Reset");
             menuReset.Click += this.Reset;
 
@@ -154,6 +155,11 @@ namespace Mandelbrot
             this.inputCenterY.Text = (0).ToString();
             this.inputZoom.Text = (1).ToString();
             this.Invalidate();
+        }
+
+        void CreateBitmap(Object obj, EventArgs ea)
+        {
+            this.MandelbrotView.Save("mandelbrot.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
 		// credits to: https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
