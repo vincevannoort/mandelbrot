@@ -6,17 +6,25 @@ namespace Mandelbrot
 {
     public class Mandelbrot : Form
     {
-        
-        Bitmap MandelbrotView;
+        // variables for interface
+        TextBox inputIterations = new TextBox();
 
-		int pixelWidth = 1000, pixelHeight = 1000;
-        int iterations = 128;
+        // variables for mandelbrotview
+        Bitmap MandelbrotView;
+		int pixelWidth = 1000, pixelHeight = 1000, margin = 50;
         int limit = 20;
         float width, height;
         float xmin, ymin, xmax, ymax;
 
         public Mandelbrot()
         {
+            // set interace variables
+            inputIterations.Size = new Size(200, 30);
+            inputIterations.Location = new Point(pixelWidth - inputIterations.Width - margin, margin - inputIterations.Height/2);
+            inputIterations.BackColor = Color.White;
+            inputIterations.Text = "128";
+            this.Controls.Add(inputIterations);
+
             // set form variables
             this.Text = "Mandelbrot";
             this.Size = new Size(this.pixelWidth, this.pixelHeight);
@@ -39,13 +47,12 @@ namespace Mandelbrot
 			MandelbrotView = new Bitmap(this.pixelWidth, this.pixelHeight);
 
             // Example of how to set a pixel
-            // MandelbrotView.SetPixel(20, 20, Color.Blue);
             for (int i = 0; i < this.pixelWidth; i++)
             {
                 for (int j = 0; j < this.pixelHeight; j++)
                 {
                     int MandelBrotNumber = this.CalculateMandelbrot(i, j);
-                    MandelbrotView.SetPixel(i,j, Color.FromArgb(MandelBrotNumber, MandelBrotNumber, MandelBrotNumber));
+                    MandelbrotView.SetPixel(i,j, Color.FromArgb(MandelBrotNumber % 128 * 2, MandelBrotNumber % 32 * 7, MandelBrotNumber % 16 * 14));
                 }
             }
 
@@ -72,6 +79,7 @@ namespace Mandelbrot
 
             // f (a,b) = (a*a-b*b+x, 2*a*b+y)
             int iteration = 0;
+            int iterations = int.Parse(this.inputIterations.Text);
             while(iteration < iterations)
             {
                 float ta = a; // temporary
@@ -86,7 +94,7 @@ namespace Mandelbrot
                 iteration++;
             }
 
-            return (int) MapRange(iteration, 0, this.iterations, 0, 255);
+            return (int) MapRange(iteration, 0, iterations, 0, 255);
         }
 
 		// credits to: https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
