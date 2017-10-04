@@ -10,10 +10,11 @@ namespace Mandelbrot
         TextBox inputIterations = new TextBox();
         TextBox inputCenterX = new TextBox();
         TextBox inputCenterY = new TextBox();
+        TextBox inputZoom = new TextBox();
 
         // variables for mandelbrotview
         Bitmap MandelbrotView;
-		int pixelWidth = 1000, pixelHeight = 1000, margin = 50, offset = 30;
+		int pixelWidth = 800, pixelHeight = 800, margin = 50, offset = 30;
         int limit = 20;
         float width, height;
         float xmin, ymin, xmax, ymax;
@@ -29,13 +30,18 @@ namespace Mandelbrot
             inputCenterX.Size = new Size(200, 30);
             inputCenterX.Location = new Point(pixelWidth - inputCenterX.Width - margin, margin - inputCenterX.Height/2 + offset);
             inputCenterX.BackColor = Color.White;
-            inputCenterX.Text = "0";
+            inputCenterX.Text = "-0,35";
             this.Controls.Add(inputCenterX);
             inputCenterY.Size = new Size(200, 30);
             inputCenterY.Location = new Point(pixelWidth - inputCenterY.Width - margin, margin - inputCenterY.Height/2 + offset*2);
             inputCenterY.BackColor = Color.White;
             inputCenterY.Text = "0";
             this.Controls.Add(inputCenterY);
+            inputZoom.Size = new Size(200, 30);
+            inputZoom.Location = new Point(pixelWidth - inputZoom.Width - margin, margin - inputZoom.Height/2 + offset*3);
+            inputZoom.BackColor = Color.White;
+            inputZoom.Text = "1";
+            this.Controls.Add(inputZoom);
 
             // set form variables
             this.Text = "Mandelbrot";
@@ -51,8 +57,9 @@ namespace Mandelbrot
             // initialise values
             float centerX = float.Parse(this.inputCenterX.Text);
             float centerY = float.Parse(this.inputCenterY.Text);
-            this.width = 4;
-            this.height = 4;
+            float zoom = float.Parse(this.inputZoom.Text);
+            this.width = 3F / zoom;
+            this.height = 3F / zoom;
             this.xmin = (-(this.width) / 2) + centerX;
             this.ymin = (-(this.height) / 2) + centerY;
             this.xmax = ((this.width) / 2) + centerX;
