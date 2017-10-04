@@ -14,7 +14,7 @@ namespace Mandelbrot
 
         // variables for mandelbrotview
         Bitmap MandelbrotView;
-		int pixelWidth = 800, pixelHeight = 800, margin = 50, offset = 30;
+		int pixelWidth = 800, pixelHeight = 800, margin = 20, offset = 30;
         int limit = 20;
         float width, height;
         float xmin, ymin, xmax, ymax;
@@ -26,22 +26,22 @@ namespace Mandelbrot
 
             // set interace variables
             inputIterations.Size = new Size(200, 30);
-            inputIterations.Location = new Point(pixelWidth - inputIterations.Width - margin, margin - inputIterations.Height/2);
+            inputIterations.Location = new Point(pixelWidth - inputIterations.Width - margin, margin + 5 - inputIterations.Height/2);
             inputIterations.BackColor = Color.White;
             inputIterations.Text = "128";
             this.Controls.Add(inputIterations);
             inputCenterX.Size = new Size(200, 30);
-            inputCenterX.Location = new Point(pixelWidth - inputCenterX.Width - margin, margin - inputCenterX.Height/2 + offset);
+            inputCenterX.Location = new Point(pixelWidth - inputCenterX.Width - margin, margin + 5 - inputCenterX.Height/2 + offset);
             inputCenterX.BackColor = Color.White;
             inputCenterX.Text = "-0,35";
             this.Controls.Add(inputCenterX);
             inputCenterY.Size = new Size(200, 30);
-            inputCenterY.Location = new Point(pixelWidth - inputCenterY.Width - margin, margin - inputCenterY.Height/2 + offset*2);
+            inputCenterY.Location = new Point(pixelWidth - inputCenterY.Width - margin, margin + 5 - inputCenterY.Height/2 + offset*2);
             inputCenterY.BackColor = Color.White;
             inputCenterY.Text = "0";
             this.Controls.Add(inputCenterY);
             inputZoom.Size = new Size(200, 30);
-            inputZoom.Location = new Point(pixelWidth - inputZoom.Width - margin, margin - inputZoom.Height/2 + offset*3);
+            inputZoom.Location = new Point(pixelWidth - inputZoom.Width - margin, margin + 5 - inputZoom.Height/2 + offset*3);
             inputZoom.BackColor = Color.White;
             inputZoom.Text = "1";
             this.Controls.Add(inputZoom);
