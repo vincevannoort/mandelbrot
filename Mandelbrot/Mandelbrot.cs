@@ -21,6 +21,9 @@ namespace Mandelbrot
 
         public Mandelbrot()
         {
+            // setup menu
+            this.InitializeMenuItems();
+
             // set interace variables
             inputIterations.Size = new Size(200, 30);
             inputIterations.Location = new Point(pixelWidth - inputIterations.Width - margin, margin - inputIterations.Height/2);
@@ -130,6 +133,18 @@ namespace Mandelbrot
                 inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
             }
             this.Invalidate();
+        }
+
+        void InitializeMenuItems()
+        {
+			MainMenu mainMenu = new MainMenu();
+			MenuItem menuAfbeelding = new MenuItem("&Afbeelding opslaan");
+            MenuItem menuReset = new MenuItem("&Reset");
+
+			mainMenu.MenuItems.Add(menuAfbeelding);
+            mainMenu.MenuItems.Add(menuReset);
+
+			this.Menu = mainMenu;
         }
 
 		// credits to: https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
