@@ -119,7 +119,16 @@ namespace Mandelbrot
         {
             //inputCenterX.Text = (this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax)).ToString();
             //inputCenterY.Text = (this.MapRange(mea.Y, 0, this.pixelHeight, this.xmin, this.xmax)).ToString();
-            inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
+
+            // left click
+            if (mea.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
+            }
+            // right click
+            else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
+                inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
+            }
             this.Invalidate();
         }
 
