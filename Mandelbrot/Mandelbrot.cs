@@ -110,15 +110,15 @@ namespace Mandelbrot
             this.inputCenterX.Text = tempX.ToString();
             this.inputCenterY.Text = tempY.ToString();
 
-            //// left click
-            //if (mea.Button == System.Windows.Forms.MouseButtons.Left)
-            //{
-            //    inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
-            //}
-            //// right click
-            //else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
-            //    inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
-            //}
+            // left click
+            if (mea.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
+            }
+            // right click
+            else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
+                inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
+            }
 
             this.Invalidate();
         }
@@ -128,10 +128,22 @@ namespace Mandelbrot
 			MainMenu mainMenu = new MainMenu();
 			MenuItem menuAfbeelding = new MenuItem("&Afbeelding opslaan");
             menuAfbeelding.Click += this.CreateBitmap;
+
+			MenuItem menuKleuren = new MenuItem("&Verander kleuren");
+            MenuItem menuKleurStandaard = new MenuItem("&Standaard");
+            menuKleuren.MenuItems.Add(menuKleurStandaard);
+			MenuItem menuKleur1 = new MenuItem("&Kleur1");
+			menuKleuren.MenuItems.Add(menuKleur1);
+			MenuItem menuKleur2 = new MenuItem("&Kleur2");
+			menuKleuren.MenuItems.Add(menuKleur2);
+			MenuItem menuKleur3 = new MenuItem("&Kleur3");
+			menuKleuren.MenuItems.Add(menuKleur3);
+
             MenuItem menuReset = new MenuItem("&Reset");
             menuReset.Click += this.Reset;
 
 			mainMenu.MenuItems.Add(menuAfbeelding);
+            mainMenu.MenuItems.Add(menuKleuren);
             mainMenu.MenuItems.Add(menuReset);
 
 			this.Menu = mainMenu;
