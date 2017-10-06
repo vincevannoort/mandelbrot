@@ -15,7 +15,7 @@ namespace Mandelbrot
 
         // variables for interface
         TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
-        TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "-0,35");
+        TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "0");
         TextBox inputCenterY = new TextboxWithConstructor(90, 30, 60, 20, 800, "0");
         TextBox inputZoom = new TextboxWithConstructor(90, 30, 90, 20, 800, "1");
 
@@ -67,9 +67,9 @@ namespace Mandelbrot
                 }
             }
 
-
             // after all pixels are set, add the image to the view
             pea.Graphics.DrawImage(MandelbrotView, 0, 0, this.pixelWidth, this.pixelHeight);
+			pea.Graphics.DrawRectangle(Pens.Red, this.pixelWidth / 2 - 10, this.pixelHeight / 2 - 10, 20, 20);
 		}
 
         int CalculateMandelbrot(int i, int j)
@@ -104,18 +104,22 @@ namespace Mandelbrot
 
         void ChangeMandelbrotOrigin(Object obj, MouseEventArgs mea)
         {
-            //inputCenterX.Text = (this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax)).ToString();
-            //inputCenterY.Text = (this.MapRange(mea.Y, 0, this.pixelHeight, this.xmin, this.xmax)).ToString();
+            float tempX = this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax);
+            float tempY = this.MapRange(mea.Y, 0, this.pixelHeight, this.xmin, this.xmax);
 
-            // left click
-            if (mea.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
-            }
-            // right click
-            else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
-                inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
-            }
+            this.inputCenterX.Text = tempX.ToString();
+            this.inputCenterY.Text = tempY.ToString();
+
+            //// left click
+            //if (mea.Button == System.Windows.Forms.MouseButtons.Left)
+            //{
+            //    inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
+            //}
+            //// right click
+            //else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
+            //    inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
+            //}
+
             this.Invalidate();
         }
 
