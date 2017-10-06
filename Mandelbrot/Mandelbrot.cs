@@ -6,18 +6,18 @@ namespace Mandelbrot
 {
     public class Mandelbrot : Form
     {
-        // variables for interface
-        TextBox inputIterations = new TextBox();
-        TextBox inputCenterX = new TextBox();
-        TextBox inputCenterY = new TextBox();
-        TextBox inputZoom = new TextBox();
-
-        // variables for mandelbrotview
-        Bitmap MandelbrotView;
+		// variables for mandelbrotview
+		Bitmap MandelbrotView;
 		int pixelWidth = 800, pixelHeight = 800, margin = 20, offset = 30;
-        int limit = 20;
-        float width, height;
-        float xmin, ymin, xmax, ymax;
+		int limit = 20;
+		float width, height;
+		float xmin, ymin, xmax, ymax;
+
+        // variables for interface
+        TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
+        TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "-0,35");
+        TextBox inputCenterY = new TextboxWithConstructor(90, 30, 60, 20, 800, "0");
+        TextBox inputZoom = new TextboxWithConstructor(90, 30, 90, 20, 800, "1");
 
         public Mandelbrot()
         {
@@ -25,30 +25,14 @@ namespace Mandelbrot
             this.InitializeMenuItems();
 
             // set interace variables
-            inputIterations.Size = new Size(200, 30);
-            inputIterations.Location = new Point(pixelWidth - inputIterations.Width - margin, margin + 5 - inputIterations.Height/2);
-            inputIterations.BackColor = Color.White;
-            inputIterations.Text = "128";
             this.Controls.Add(inputIterations);
-            inputCenterX.Size = new Size(200, 30);
-            inputCenterX.Location = new Point(pixelWidth - inputCenterX.Width - margin, margin + 5 - inputCenterX.Height/2 + offset);
-            inputCenterX.BackColor = Color.White;
-            inputCenterX.Text = "-0,35";
             this.Controls.Add(inputCenterX);
-            inputCenterY.Size = new Size(200, 30);
-            inputCenterY.Location = new Point(pixelWidth - inputCenterY.Width - margin, margin + 5 - inputCenterY.Height/2 + offset*2);
-            inputCenterY.BackColor = Color.White;
-            inputCenterY.Text = "0";
             this.Controls.Add(inputCenterY);
-            inputZoom.Size = new Size(200, 30);
-            inputZoom.Location = new Point(pixelWidth - inputZoom.Width - margin, margin + 5 - inputZoom.Height/2 + offset*3);
-            inputZoom.BackColor = Color.White;
-            inputZoom.Text = "1";
             this.Controls.Add(inputZoom);
 
             // set form variables
             this.Text = "Mandelbrot";
-            this.Size = new Size(this.pixelWidth, this.pixelHeight);
+            this.Size = new Size(this.pixelWidth, this.pixelHeight + this.margin + this.offset);
 
             // create event handler to draw the mandelbrot
             this.Paint += this.DrawMandelbrot;
@@ -108,7 +92,7 @@ namespace Mandelbrot
                 a = (ta * ta - tb * tb) + x;
                 b = 2 * ta * tb + y;
 
-                if (Math.Sqrt(a*a + b*b) > this.limit)
+                if ((a*a + b*b) > this.limit*this.limit)
                 {
                     break;
                 }
@@ -178,6 +162,20 @@ namespace Mandelbrot
         {
             Mandelbrot m = new Mandelbrot();
             Application.Run(m);
+        }
+    }
+
+    public class TextboxWithConstructor : TextBox
+    {
+        public TextboxWithConstructor(int width, int height, int offset, int margin, int pixelWidth, string text)
+        {
+            this.Size = new Size(width, height);
+            this.Location = new Point(
+                pixelWidth - this.Width - margin,
+                margin + 5 - this.Height / 2 + offset
+            );
+            this.BackColor = Color.White;
+            this.Text = text;
         }
     }
 }
