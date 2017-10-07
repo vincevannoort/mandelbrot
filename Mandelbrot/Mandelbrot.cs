@@ -19,9 +19,13 @@ namespace Mandelbrot
 
         // variables for interface
         TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
-        TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "0");
+        TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "-0,35");
         TextBox inputCenterY = new TextboxWithConstructor(90, 30, 60, 20, 800, "0");
         TextBox inputZoom = new TextboxWithConstructor(90, 30, 90, 20, 800, "1");
+        Label labelIterations = new LabelWithConstructor("Iterations", 0, 20, 800, 90);
+        Label labelCenterX = new LabelWithConstructor("Center X", 30, 20, 800, 90);
+        Label labelCenterY = new LabelWithConstructor("Center Y", 60, 20, 800, 90);
+        Label labelZoom = new LabelWithConstructor("Zoomlevel", 90, 20, 800, 90);
 
         public Mandelbrot()
         {
@@ -31,9 +35,13 @@ namespace Mandelbrot
             this.InitializeMenuItems();
 
             // set interace variables
+            this.Controls.Add(labelIterations);
             this.Controls.Add(inputIterations);
+            this.Controls.Add(labelCenterX);
             this.Controls.Add(inputCenterX);
+            this.Controls.Add(labelCenterY);
             this.Controls.Add(inputCenterY);
+            this.Controls.Add(labelZoom);
             this.Controls.Add(inputZoom);
 
             // set form variables
@@ -198,6 +206,21 @@ namespace Mandelbrot
             );
             this.BackColor = Color.White;
             this.Text = text;
+        }
+    }
+
+    public class LabelWithConstructor : Label
+    {
+        public LabelWithConstructor(string text, int offset, int margin, int pixelWidth, int textboxWidth)
+        {
+            this.Text = text;
+            this.Size = new Size(50, 30);
+            this.BackColor = Color.Transparent;
+            this.ForeColor = Color.White;
+			this.Location = new Point(
+				pixelWidth - textboxWidth - margin - 60,
+				margin + 12 - this.Height / 2 + offset
+			); ;
         }
     }
 }
