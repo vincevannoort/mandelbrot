@@ -13,6 +13,7 @@ namespace Mandelbrot
 		float width, height;
 		float xmin, ymin, xmax, ymax;
 
+
         // variables for interface
         TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
         TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "0");
@@ -21,6 +22,8 @@ namespace Mandelbrot
 
         public Mandelbrot()
         {
+            System.Diagnostics.Debug.WriteLine(String.Format("Example debug string: {0}", "here!"));
+
             // setup menu
             this.InitializeMenuItems();
 
@@ -47,10 +50,10 @@ namespace Mandelbrot
             float zoom = float.Parse(this.inputZoom.Text);
             this.width = 3F / zoom;
             this.height = 3F / zoom;
-            this.xmin = (-(this.width) / 2) + centerX;
-            this.ymin = (-(this.height) / 2) + centerY;
-            this.xmax = ((this.width) / 2) + centerX;
-            this.ymax = ((this.height) / 2) + centerY;
+            this.xmin = centerX + (-(this.width) / 2);
+            this.ymin = centerY + (-(this.height) / 2);
+            this.xmax = centerX + ((this.width) / 2);
+            this.ymax = centerY + ((this.height) / 2);
 
             this.Text = "xmin " + xmin.ToString() + " | ymin " + xmin.ToString() +  " | xmax " + xmax.ToString() + " | ymax " + ymax.ToString();
 
@@ -105,7 +108,7 @@ namespace Mandelbrot
         void ChangeMandelbrotOrigin(Object obj, MouseEventArgs mea)
         {
             float tempX = this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax);
-            float tempY = this.MapRange(mea.Y, 0, this.pixelHeight, this.xmin, this.xmax);
+            float tempY = this.MapRange(mea.Y, 0, this.pixelHeight, this.ymin, this.ymax);
 
             this.inputCenterX.Text = tempX.ToString();
             this.inputCenterY.Text = tempY.ToString();
