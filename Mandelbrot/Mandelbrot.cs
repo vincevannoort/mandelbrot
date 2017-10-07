@@ -13,6 +13,9 @@ namespace Mandelbrot
 		float width, height;
 		float xmin, ymin, xmax, ymax;
 
+        // variables for colors
+        int rmod = 128, rmul = 2, gmod = 32, gmul = 7, bmod = 16, bmul = 14;
+
 
         // variables for interface
         TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
@@ -66,7 +69,7 @@ namespace Mandelbrot
                 for (int j = 0; j < this.pixelHeight; j++)
                 {
                     int MandelBrotNumber = this.CalculateMandelbrot(i, j);
-                    MandelbrotView.SetPixel(i,j, Color.FromArgb(MandelBrotNumber % 128 * 2, MandelBrotNumber % 32 * 7, MandelBrotNumber % 16 * 14));
+                    MandelbrotView.SetPixel(i,j, Color.FromArgb(MandelBrotNumber % rmod * rmul, MandelBrotNumber % gmod * gmul, MandelBrotNumber % bmod * bmul));
                 }
             }
 
