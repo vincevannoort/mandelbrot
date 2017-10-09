@@ -144,12 +144,16 @@ namespace Mandelbrot
             // kleuren
 			MenuItem menuKleuren = new MenuItem("&Verander kleuren");
             MenuItem menuKleurStandaard = new MenuItem("&Standaard");
+            menuKleurStandaard.Click += this.SetColor;
             menuKleuren.MenuItems.Add(menuKleurStandaard);
 			MenuItem menuKleur1 = new MenuItem("&Kleur1");
+            menuKleur1.Click += this.SetColor;
 			menuKleuren.MenuItems.Add(menuKleur1);
 			MenuItem menuKleur2 = new MenuItem("&Kleur2");
+            menuKleur2.Click += this.SetColor;
 			menuKleuren.MenuItems.Add(menuKleur2);
 			MenuItem menuKleur3 = new MenuItem("&Kleur3");
+            menuKleur3.Click += this.SetColor;
 			menuKleuren.MenuItems.Add(menuKleur3);
 
             // reset
@@ -161,6 +165,52 @@ namespace Mandelbrot
             mainMenu.MenuItems.Add(menuReset);
 
 			this.Menu = mainMenu;
+        }
+
+        void SetColor(Object obj, EventArgs ea)
+        {
+            MenuItem cbutton = obj as MenuItem;
+			if (cbutton.Text == "&Standaard")
+			{
+				this.rmod = 128;
+				this.rmul = 2;
+				this.gmod = 32;
+				this.gmul = 7;
+				this.bmod = 16;
+				this.bmul = 14;
+			}
+
+            else if (cbutton.Text == "&Kleur1")
+            {
+				this.rmod = 25;
+				this.rmul = 10;
+				this.gmod = 51; 
+				this.gmul = 5;
+				this.bmod = 23;
+				this.bmul = 11;
+            }
+
+            else if(cbutton.Text == "&Kleur2")
+            {
+				this.rmod = 28;
+				this.rmul = 9;
+				this.gmod = 8;
+				this.gmul = 30;
+				this.bmod = 64;
+				this.bmul = 4;
+            }
+
+            else if (cbutton.Text == "&Kleur3")
+            {
+				this.rmod = 64;
+				this.rmul = 4;
+				this.gmod = 28;
+				this.gmul = 9;
+				this.bmod = 25;
+				this.bmul = 10;
+            }
+
+            this.Invalidate();
         }
 
         void Reset(Object obj, EventArgs ea)
