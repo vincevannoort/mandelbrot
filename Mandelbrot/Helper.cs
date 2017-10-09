@@ -32,4 +32,14 @@ namespace Mandelbrot
 			); ;
 		}
 	}
+
+    public class ButtonWithConstructor : Button
+    {
+        public ButtonWithConstructor(string text, int x, int y)
+        {
+            this.Text = text;
+            this.Location = new Point(x, y);
+            this.BackColor = Color.White;
+        }
+    }
 }

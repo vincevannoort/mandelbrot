@@ -25,6 +25,7 @@ namespace Mandelbrot
         Label labelCenterX = new LabelWithConstructor("Center X", 30, 20, 800, 90);
         Label labelCenterY = new LabelWithConstructor("Center Y", 60, 20, 800, 90);
         Label labelZoom = new LabelWithConstructor("Zoomlevel", 90, 20, 800, 90);
+        Button buttonRerender = new ButtonWithConstructor("Rerender", 706, 136);
 
         public Mandelbrot()
         {
@@ -40,6 +41,8 @@ namespace Mandelbrot
             this.Controls.Add(inputCenterY);
             this.Controls.Add(labelZoom);
             this.Controls.Add(inputZoom);
+            buttonRerender.Click += this.Rerender;
+            this.Controls.Add(buttonRerender);
 
             // set form variables
             this.Text = "Mandelbrot";
@@ -218,6 +221,11 @@ namespace Mandelbrot
             this.inputCenterX.Text = (-0.35).ToString();
             this.inputCenterY.Text = (0).ToString();
             this.inputZoom.Text = (1).ToString();
+            this.Invalidate();
+        }
+
+        void Rerender(Object obj, EventArgs ea)
+        {
             this.Invalidate();
         }
 
