@@ -45,7 +45,7 @@ namespace Mandelbrot
             this.Controls.Add(buttonRerender);
 
             // set form variables
-            this.Text = "Mandelbrot";
+            this.Text = "Mandelbrot - Niek Geijtenbeek & Vince van Noort";
             this.Size = new Size(this.pixelWidth, this.pixelHeight + this.margin + this.offset);
 
             // create event handler to draw the mandelbrot
@@ -65,8 +65,6 @@ namespace Mandelbrot
             this.ymin = centerY + (-(this.height) / 2);
             this.xmax = centerX + ((this.width) / 2);
             this.ymax = centerY + ((this.height) / 2);
-
-            this.Text = "xmin " + xmin.ToString() + " | ymin " + xmin.ToString() +  " | xmax " + xmax.ToString() + " | ymax " + ymax.ToString();
 
             // create bitmap object for view
 			MandelbrotView = new Bitmap(this.pixelWidth, this.pixelHeight);
