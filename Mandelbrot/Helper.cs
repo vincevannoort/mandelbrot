@@ -24,7 +24,7 @@ namespace Mandelbrot
 		{
 			this.Text = text;
 			this.Size = new Size(50, 30);
-			//this.BackColor = Color.Transparent;
+            this.BackColor = Color.FromArgb(9, 21, 41);
 			this.ForeColor = Color.White;
 			this.Location = new Point(
 				pixelWidth - textboxWidth - margin - 60,
