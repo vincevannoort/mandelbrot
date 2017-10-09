@@ -16,7 +16,6 @@ namespace Mandelbrot
         // variables for colors
         int rmod = 128, rmul = 2, gmod = 32, gmul = 7, bmod = 16, bmul = 14;
 
-
         // variables for interface
         TextBox inputIterations = new TextboxWithConstructor(90, 30, 0, 20, 800, "128");
         TextBox inputCenterX = new TextboxWithConstructor(90, 30, 30, 20, 800, "-0,35");
@@ -29,8 +28,6 @@ namespace Mandelbrot
 
         public Mandelbrot()
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("Example debug string: {0}", "here!"));
-
             // setup menu
             this.InitializeMenuItems();
 
@@ -106,6 +103,7 @@ namespace Mandelbrot
                 a = (ta * ta - tb * tb) + x;
                 b = 2 * ta * tb + y;
 
+                // multiply the limit instead of math.sqrt function because multiplication is a cheaper operation
                 if ((a*a + b*b) > this.limit*this.limit)
                 {
                     break;
@@ -118,17 +116,15 @@ namespace Mandelbrot
 
         void ChangeMandelbrotOrigin(Object obj, MouseEventArgs mea)
         {
-            float tempX = this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax);
-            float tempY = this.MapRange(mea.Y, 0, this.pixelHeight, this.ymin, this.ymax);
-
-            this.inputCenterX.Text = tempX.ToString();
-            this.inputCenterY.Text = tempY.ToString();
+            this.inputCenterX.Text = this.MapRange(mea.X, 0, this.pixelWidth, this.xmin, this.xmax).ToString();
+            this.inputCenterY.Text = this.MapRange(mea.Y, 0, this.pixelHeight, this.ymin, this.ymax).ToString();
 
             // left click
             if (mea.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 inputZoom.Text = (float.Parse(this.inputZoom.Text) * 1.35).ToString();
             }
+
             // right click
             else if(mea.Button == System.Windows.Forms.MouseButtons.Right) {
                 inputZoom.Text = (float.Parse(this.inputZoom.Text) / 1.35).ToString();
@@ -140,9 +136,12 @@ namespace Mandelbrot
         void InitializeMenuItems()
         {
 			MainMenu mainMenu = new MainMenu();
+
+            // afbeelding
 			MenuItem menuAfbeelding = new MenuItem("&Afbeelding opslaan");
             menuAfbeelding.Click += this.CreateBitmap;
 
+            // kleuren
 			MenuItem menuKleuren = new MenuItem("&Verander kleuren");
             MenuItem menuKleurStandaard = new MenuItem("&Standaard");
             menuKleuren.MenuItems.Add(menuKleurStandaard);
@@ -153,6 +152,7 @@ namespace Mandelbrot
 			MenuItem menuKleur3 = new MenuItem("&Kleur3");
 			menuKleuren.MenuItems.Add(menuKleur3);
 
+            // reset
             MenuItem menuReset = new MenuItem("&Reset");
             menuReset.Click += this.Reset;
 
